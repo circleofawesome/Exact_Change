@@ -87,6 +87,7 @@ function changeMaker(change,startingPoint,currencyTotal){
 		while(change<=currencyTotal){
 			currencyTotal-=startingPoint;
 			change-=startingPoint;
+			change=parseFloat(change.toFixed(2));
 			if(change===0){
 				break;
 			}
