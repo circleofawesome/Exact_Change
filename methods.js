@@ -142,20 +142,36 @@ function startingPoint(change){
 
 //takes change, starting point and how much of that currency you have and gives you how much it can give you and the remaining change
 function changeMaker(change,startingPoint,currencyTotal){
+	var goToNext=false;
 	if(change>=currencyTotal){
-		return [startingPoint,currencyTotal,change];
+		change-=currencyTotal;
+		goToNext=true;
+		return [startingPoint,currencyTotal,change,goToNext];
 	}
 	else{
+		var originalCurrencyTotal=currencyTotal;
 		while(change<=currencyTotal){
 			currencyTotal-=startingPoint;
+			change-=startingPoint;
+			if(change===0){
+				break;
+			}
+			else if(change<startingPoint){
+				break;
+			}
 		}
-		change-=currencyTotal;
-		return [startingPoint,currencyTotal,change];
+		currencyTotal=originalCurrencyTotal-currencyTotal;
+		return [startingPoint,currencyTotal,change,goToNext];
 	}
 	
 }
 
-//changeMaker(49.00,20.00,60.00);
+//changeMaker(.75,.25,.50); //should return .25 .50 .25
+
+//changeMaker(40,20,60);//should return 20 40 0
+
+//changeMaker(49,20,60); //should return 20 40 9
+
 
 ===================
 

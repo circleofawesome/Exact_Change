@@ -76,15 +76,26 @@ function startingPoint(change){
 }
 
 function changeMaker(change,startingPoint,currencyTotal){
+	var goToNext=false;
 	if(change>=currencyTotal){
-		return [startingPoint,currencyTotal,change];
+		change-=currencyTotal;
+		goToNext=true;
+		return [startingPoint,currencyTotal,change,goToNext];
 	}
 	else{
+		var originalCurrencyTotal=currencyTotal;
 		while(change<=currencyTotal){
 			currencyTotal-=startingPoint;
+			change-=startingPoint;
+			if(change===0){
+				break;
+			}
+			else if(change<startingPoint){
+				break;
+			}
 		}
-		change-=currencyTotal;
-		return [startingPoint,currencyTotal,change];
+		currencyTotal=originalCurrencyTotal-currencyTotal;
+		return [startingPoint,currencyTotal,change,goToNext];
 	}
 	
 }
@@ -162,18 +173,20 @@ function checkCashRegister(price, cash, cid) {
   var retArr=[];
   var startingP=startingPoint(change);
   var currencyTotal=cidObj[numToText(startingP)];
+  var goToNext=false;
   while(change>0){
   	var tempArr=changeMaker(change,startingP,currencyTotal);
-  	retArr.push(tempArr);
-  	//here if change===tempArr[2] then set startingP to equal to next lowest startingP, make function for this
-  	if(change===tempArr[2]){
-  		startingP=nextLowest(change);
+  	retArr.push([tempArr[0],tempArr[1]]);
+    goToNext=tempArr[3];
+    change=tempArr[2];
+  	if(goToNext===false){
+  		//do the normal 
+  		startingP=startingPoint(change);
   	}
   	else{
-  		startingP=startingPoint(tempArr[2]);
+  		//run nextLowest
+  		startingP=nextLowest(change);
   	}
-  	currencyTotal=cidObj[numToText(startingP)];
-  	change=tempArr[2];
   }
   return retArr;
 }
