@@ -77,7 +77,7 @@ function startingPoint(change){
 
 function changeMaker(change,startingPoint,currencyTotal){
 	if(change>=currencyTotal){
-		return [startingPoint,currencyTotal];
+		return [startingPoint,currencyTotal,change];
 	}
 	else{
 		while(change<=currencyTotal){
@@ -119,6 +119,33 @@ function numToText(num){
 	}
 }
 
+function nextLowest(change){
+	if(startingPoint(change)===100.00){
+		return 20.00;
+	}
+	else if(startingPoint(change)===20.00){
+		return 10.00;
+	}
+	else if(startingPoint(change)===10.00){
+		return 5.00;
+	}
+	else if(startingPoint(change)===5.00){
+		return 1.00;
+	}
+	else if(startingPoint(change)===1.00){
+		return 0.25;
+	}
+	else if(startingPoint(change)===0.25){
+		return 0.10;
+	}
+	else if(startingPoint(change)===0.10){
+		return 0.05;
+	}
+	else if(startingPoint(change)===0.05){
+		return 0.01;
+	}
+}
+
 
 
 //*********************MAIN FUNCTION BELOW*******************************//
@@ -138,9 +165,18 @@ function checkCashRegister(price, cash, cid) {
   while(change>0){
   	var tempArr=changeMaker(change,startingP,currencyTotal);
   	retArr.push(tempArr);
-  	startingP=startingPoint(tempArr[2]);
+  	//here if change===tempArr[2] then set startingP to equal to next lowest startingP, make function for this
+  	if(change===tempArr[2]){
+  		startingP=nextLowest(change);
+  	}
+  	else{
+  		startingP=startingPoint(tempArr[2]);
+  	}
   	currencyTotal=cidObj[numToText(startingP)];
   	change=tempArr[2];
   }
   return retArr;
 }
+
+
+//***STILL RETURING INFINITE WHILE LOOP DUE TO CHANGE NOT CHANGING, FIX THAT 

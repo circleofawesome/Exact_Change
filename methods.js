@@ -158,3 +158,36 @@ function changeMaker(change,startingPoint,currencyTotal){
 //changeMaker(49.00,20.00,60.00);
 
 ===================
+
+
+//takes change and returns the next lowest startingP, needs function startingPoint to run properly
+function nextLowest(change){
+	if(startingPoint(change)===100.00){
+		return 20.00;
+	}
+	else if(startingPoint(change)===20.00){
+		return 10.00;
+	}
+	else if(startingPoint(change)===10.00){
+		return 5.00;
+	}
+	else if(startingPoint(change)===5.00){
+		return 1.00;
+	}
+	else if(startingPoint(change)===1.00){
+		return 0.25;
+	}
+	else if(startingPoint(change)===0.25){
+		return 0.10;
+	}
+	else if(startingPoint(change)===0.10){
+		return 0.05;
+	}
+	else if(startingPoint(change)===0.05){
+		return 0.01;
+	}
+}
+
+//nextLowest(96.74);
+
+=====================
