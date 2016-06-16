@@ -33,6 +33,41 @@ function totalCid(obj){
 
 ================
 
+//takes a float and returns it's name as a string
+function numToText(num){
+	if(num===100.00){
+		return 'ONE HUNDRED';
+	}
+	else if(num===20.00){
+		return 'TWENTY';
+	}
+	else if(num===10.00){
+		return 'TEN';
+	}
+	else if(num===5.00){
+		return 'FIVE';
+	}
+	else if(num===1.00){
+		return 'ONE';
+	}
+	else if(num===0.25){
+		return 'QUARTER';
+	}
+	else if(num===0.10){
+		return 'DIME';
+	}
+	else if(num===0.05){
+		return 'NICKEL';
+	}
+	else{
+		return 'PENNY';
+	}
+}
+
+//numToText(20.00);
+
+================
+
 //takes the string of the currency and returns its float value
 function textToNum(str){
 	if(str==='ONE HUNDRED'){
@@ -70,3 +105,56 @@ function textToNum(str){
 =================
 
 
+//takes the change and returns the place where you should start subtracting your change from
+function startingPoint(change){
+	if(change>=100){
+		return 100.00;
+	}
+	else if(change>=20){
+		return 20.00;
+	}
+	else if(change>=10){
+		return 10.00;
+	}
+	else if(change>=5){
+		return 5.00;
+	}
+	else if(change>=1){
+		return 1.00;
+	}
+	else if(change>=0.25){
+		return 0.25;
+	}
+	else if(change>=0.10){
+		return 0.10;
+	}
+	else if(change>=0.05){
+		return 0.05;
+	}
+	else{
+		return 0.01;
+	}
+}
+
+//startingPoint(0.25);
+
+==================
+
+//takes change, starting point and how much of that currency you have and gives you how much it can give you and the remaining change
+function changeMaker(change,startingPoint,currencyTotal){
+	if(change>=currencyTotal){
+		return [startingPoint,currencyTotal,change];
+	}
+	else{
+		while(change<=currencyTotal){
+			currencyTotal-=startingPoint;
+		}
+		change-=currencyTotal;
+		return [startingPoint,currencyTotal,change];
+	}
+	
+}
+
+//changeMaker(49.00,20.00,60.00);
+
+===================
