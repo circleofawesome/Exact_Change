@@ -80,7 +80,7 @@ function changeMaker(change,startingPoint,currencyTotal){
 	if(change>=currencyTotal){
 		change-=currencyTotal;
 		goToNext=true;
-		return [startingPoint,currencyTotal,change,goToNext];
+		return[parseFloat(startingPoint.toFixed(2)),parseFloat(currencyTotal.toFixed(2)),parseFloat(change.toFixed(2)),goToNext];
 	}
 	else{
 		var originalCurrencyTotal=currencyTotal;
@@ -95,7 +95,7 @@ function changeMaker(change,startingPoint,currencyTotal){
 			}
 		}
 		currencyTotal=originalCurrencyTotal-currencyTotal;
-		return [startingPoint,currencyTotal,change,goToNext];
+		return[parseFloat(startingPoint.toFixed(2)),parseFloat(currencyTotal.toFixed(2)),parseFloat(change.toFixed(2)),goToNext];
 	}
 	
 }
