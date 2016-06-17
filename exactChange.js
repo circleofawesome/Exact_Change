@@ -179,16 +179,15 @@ function checkCashRegister(price, cash, cid) {
   var currencyTotal=cidObj[numToText(startingP)];
   var goToNext=false;
   while(change>0){
+  	currencyTotal=cidObj[numToText(startingP)];
   	var tempArr=changeMaker(change,startingP,currencyTotal);
   	retArr.push([tempArr[0],tempArr[1]]);
     goToNext=tempArr[3];
     change=tempArr[2];
   	if(goToNext===false){
-  		//do the normal 
   		startingP=startingPoint(change);
   	}
   	else{
-  		//run nextLowest
   		startingP=nextLowest(startingP);
   		if(typeof startingP==='string'){
   			return startingP;
@@ -200,6 +199,3 @@ function checkCashRegister(price, cash, cid) {
   }
   return retArr;
 }
-
-
-//***STILL RETURING INFINITE WHILE LOOP DUE TO CHANGE NOT CHANGING, FIX THAT 
