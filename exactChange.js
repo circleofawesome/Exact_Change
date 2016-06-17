@@ -131,30 +131,33 @@ function numToText(num){
 	}
 }
 
-function nextLowest(change){
-	if(startingPoint(change)===100.00){
+function nextLowest(startingP){
+	if(startingP===100.00){
 		return 20.00;
 	}
-	else if(startingPoint(change)===20.00){
+	else if(startingP===20.00){
 		return 10.00;
 	}
-	else if(startingPoint(change)===10.00){
+	else if(startingP===10.00){
 		return 5.00;
 	}
-	else if(startingPoint(change)===5.00){
+	else if(startingP===5.00){
 		return 1.00;
 	}
-	else if(startingPoint(change)===1.00){
+	else if(startingP===1.00){
 		return 0.25;
 	}
-	else if(startingPoint(change)===0.25){
+	else if(startingP===0.25){
 		return 0.10;
 	}
-	else if(startingPoint(change)===0.10){
+	else if(startingP===0.10){
 		return 0.05;
 	}
-	else if(startingPoint(change)===0.05){
+	else if(startingP===0.05){
 		return 0.01;
+	}
+	else{
+		return "Insufficient Funds";
 	}
 }
 
@@ -186,7 +189,10 @@ function checkCashRegister(price, cash, cid) {
   	}
   	else{
   		//run nextLowest
-  		startingP=nextLowest(change);
+  		startingP=nextLowest(startingP);
+  		if(typeof startingP==='string'){
+  			return startingP;
+  		}
   	}
   }
   return retArr;

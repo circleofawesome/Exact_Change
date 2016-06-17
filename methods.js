@@ -178,7 +178,8 @@ function changeMaker(change,startingPoint,currencyTotal){
 
 
 //takes change and returns the next lowest startingP, needs function startingPoint to run properly
-function nextLowest(change){
+//THIS FUNCTION IS NOT BEING USED
+/*function nextLowest(change){
 	if(startingPoint(change)===100.00){
 		return 20.00;
 	}
@@ -206,5 +207,40 @@ function nextLowest(change){
 }
 
 //nextLowest(96.74);
+*/
+=====================
+
+//takes startingP and returns the startingP currency that's one lower it (100 becomes 20, or quarter becomes a dime)
+function nextLowest(startingP){
+	if(startingP===100.00){
+		return 20.00;
+	}
+	else if(startingP===20.00){
+		return 10.00;
+	}
+	else if(startingP===10.00){
+		return 5.00;
+	}
+	else if(startingP===5.00){
+		return 1.00;
+	}
+	else if(startingP===1.00){
+		return 0.25;
+	}
+	else if(startingP===0.25){
+		return 0.10;
+	}
+	else if(startingP===0.10){
+		return 0.05;
+	}
+	else if(startingP===0.05){
+		return 0.01;
+	}
+	else{
+		return "Insufficient Funds";
+	}
+}
+
+//nextLowest(0.10);
 
 =====================
