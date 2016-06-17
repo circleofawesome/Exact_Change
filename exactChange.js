@@ -195,6 +195,9 @@ function checkCashRegister(price, cash, cid) {
   		}
   	}
   }
+  for(var i=0;i<retArr.length;i++){
+  	retArr[i][0]=numToText(retArr[i][0]);
+  }
   return retArr;
 }
 
